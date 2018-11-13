@@ -1,0 +1,35 @@
+import jsonp from '../common/js/jsonp'
+import {
+  commonParams,
+} from './config'
+import axios from 'axios'
+
+export function getHotlist(id){
+    const url = '/hotlist'
+    const data = Object.assign({},commonParams,{
+        g_tk:590641488,
+        uin:0,
+        format:'json',
+        inCharset:'utf-8',
+        outCharset:'utf-8',
+        notice:0,
+        platform:'h5',
+        needNewCode:1,
+        new_format:1,
+        pic:500,
+        disstid:id,
+        type: 1,
+        json: 1,
+        utf8: 1,
+        onlysong: 0,
+        picmid: 1,
+        nosign: 1,
+        song_begin: 0,
+        song_num: 15,
+    })
+    return axios.get(url,{
+        params: data
+    }).then((res)=>{
+        return Promise.resolve(res.data)
+    })
+}
